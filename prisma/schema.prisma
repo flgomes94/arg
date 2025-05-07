@@ -13,6 +13,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model City {
+  id          String   @id @default(cuid())
+  name        String
+  difficulty  Int      // nível de 1 a 5
+  description String
+  
+  cases       Case[]
+}
+
 model Case {
   id          String   @id @default(cuid())
   title       String
@@ -20,7 +29,9 @@ model Case {
   context     String
   publishedAt DateTime @default(now())
   status      String   // ativo, arquivado etc.
+  cityId      String?
 
+  city        City?    @relation(fields: [cityId], references: [id])
   files       File[]
   people      Person[]
 }

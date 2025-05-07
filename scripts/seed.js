@@ -2,6 +2,27 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
+  // Criar cidades
+  const city1 = await prisma.city.create({
+    data: {
+      name: 'Porto Seguro',
+      difficulty: 2,
+      description: 'Cidade costeira tranquila com poucos casos criminais, ideal para investigadores iniciantes.',
+    },
+  });
+  
+  console.log('Cidade criada:', city1.id);
+  
+  const city2 = await prisma.city.create({
+    data: {
+      name: 'Metrópolis',
+      difficulty: 4,
+      description: 'Grande centro urbano com alta taxa de criminalidade e casos complexos que exigem experiência.',
+    },
+  });
+  
+  console.log('Cidade criada:', city2.id);
+
   // Criar um caso de exemplo
   const case1 = await prisma.case.create({
     data: {
@@ -9,6 +30,7 @@ async function main() {
       summary: 'Investigação sobre o misterioso desaparecimento de um passageiro em um cruzeiro.',
       context: 'Um passageiro do cruzeiro Oceanic Dream desapareceu misteriosamente durante uma viagem pelo Caribe. Não há sinais de que tenha caído ao mar e as câmeras de segurança não registraram sua saída da cabine.',
       status: 'ativo',
+      cityId: city1.id, // Associar à cidade de Porto Seguro (dificuldade 2)
     },
   });
   
@@ -117,6 +139,7 @@ async function main() {
       summary: 'Investigação sobre o roubo de uma valiosa obra de arte em plena luz do dia.',
       context: 'Uma pintura avaliada em 2 milhões de dólares foi roubada da Galeria Nacional durante o horário de visitação. As câmeras de segurança foram desligadas momentos antes e os guardas não notaram nada suspeito.',
       status: 'ativo',
+      cityId: city2.id, // Associar à cidade de Metrópolis (dificuldade 4)
     },
   });
 
