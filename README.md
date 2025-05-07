@@ -1,4 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ARG Project
+
+Este é um projeto Next.js com TypeScript, Prisma ORM e configurações ESLint baseadas no Airbnb Style Guide.
+
+## Configuração
+
+1. Clone o repositório
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Crie um arquivo `.env` na raiz do projeto com a seguinte configuração:
+   ```
+   DATABASE_URL="file:./dev.db"
+   ```
+
+4. Execute as migrações do Prisma:
+   ```bash
+   npm run prisma:generate
+   npm run prisma:migrate
+   ```
+
+## Scripts disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Gera a build de produção
+- `npm run start` - Inicia o servidor de produção
+- `npm run lint` - Executa o linter (ESLint)
+- `npm run prisma:generate` - Gera o cliente Prisma
+- `npm run prisma:migrate` - Executa migrações do banco de dados
+- `npm run prisma:studio` - Abre o Prisma Studio para gerenciar o banco de dados
+
+## Tecnologias
+
+- Next.js
+- TypeScript
+- Prisma ORM
+- ESLint (configuração Airbnb)
+- Prettier
 
 ## Getting Started
 

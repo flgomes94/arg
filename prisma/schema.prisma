@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Case {
+  id          String   @id @default(cuid())
+  title       String
+  summary     String
+  context     String
+  publishedAt DateTime @default(now())
+  status      String   // ativo, arquivado etc.
+
+  files       File[]
+  people      Person[]
+}
+
+model File {
+  id          String   @id @default(cuid())
+  caseId      String
+  type        String   // relato, imagem, entrevista, documento
+  title       String
+  description String?
+  content     String   // texto ou URL da imagem
+  availableAt DateTime
+
+  case        Case     @relation(fields: [caseId], references: [id])
+}
+
+model Person {
+  id          String   @id @default(cuid())
+  caseId      String
+  name        String
+  role        String   // vítima, suspeito, testemunha
+  description String
+  image       String?  // URL de imagem (opcional)
+
+  case        Case     @relation(fields: [caseId], references: [id])
+}
