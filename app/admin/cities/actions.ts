@@ -32,13 +32,13 @@ export async function createCity(formData: FormData) {
         description: description || '', // Garante que não seja null
       }
     });
-    
-    // Redirecionar para a lista de cidades
-    redirect('/admin/cities?success=create');
   } catch (error) {
     console.error('Erro ao criar cidade:', error);
     throw new Error('Não foi possível criar a cidade. Tente novamente.');
   }
+  
+  // Redirecionar para a lista de cidades
+  redirect('/admin/cities?success=create');
 }
 
 /**
@@ -77,13 +77,13 @@ export async function updateCity(formData: FormData) {
         description: description || '',
       }
     });
-    
-    // Redirecionar para a lista de cidades
-    redirect('/admin/cities?success=update');
   } catch (error) {
     console.error('Erro ao atualizar cidade:', error);
     throw new Error('Não foi possível atualizar a cidade. Tente novamente.');
   }
+  
+  // Redirecionar para a lista de cidades
+  redirect('/admin/cities?success=update');
 }
 
 /**
@@ -103,11 +103,11 @@ export async function deleteCity(formData: FormData) {
         id: cityId
       }
     });
-    
-    // Redirecionar para a lista de cidades
-    redirect('/admin/cities?success=delete');
   } catch (error) {
     console.error('Erro ao excluir cidade:', error);
     throw new Error('Não foi possível excluir a cidade. Verifique se não há casos associados.');
   }
+  
+  // Redirecionar para a lista de cidades
+  redirect('/admin/cities?success=delete');
 } 
